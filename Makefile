@@ -13,3 +13,7 @@ main.o: main.c httpd.h
 httpd.o: httpd.c httpd.h
 	gcc -c -o httpd.o httpd.c
 
+install:
+	install --mode=755 server /usr/sbin
+	install --mode=644 server.service /etc/systemd/system
+
