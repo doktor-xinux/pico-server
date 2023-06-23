@@ -5,7 +5,7 @@ Description=Simple Pico Server
 Type=simple
 ExecStart=/usr/sbin/pico-server
 ExecStartPost=/bin/echo "Pico Server gestartet"
-User=www-data
+User=root
 
 [Install]
 WantedBy=multi-user.target
