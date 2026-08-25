@@ -1,10 +1,12 @@
-all: server
+DESTDIR ?=
+
+all: pico-server
 
 clean:
 	@rm -rf *.o
 	@rm -rf pico-server
 
-server: main.o httpd.o
+pico-server: main.o httpd.o
 	gcc -o pico-server $^
 
 main.o: main.c httpd.h
@@ -14,6 +16,7 @@ httpd.o: httpd.c httpd.h
 	gcc -c -o httpd.o httpd.c
 
 install:
-	install --mode=755 pico-server /usr/sbin
-	install --mode=644 pico-server.service /etc/systemd/system
-
+	install -d $(DESTDIR)/usr/sbin
+	install --mode=755 pico-server $(DESTDIR)/usr/sbin
+	install -d $(DESTDIR)/usr/lib/systemd/system
+	install --mode=644 pico-server.service $(DESTDIR)/usr/lib/systemd/system
